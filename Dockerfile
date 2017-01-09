@@ -11,7 +11,7 @@ RUN  echo "deb http://archive.ubuntu.com/ubuntu xenial main universe\n" > /etc/a
 RUN apt-get update -qqy \
   && apt-get -qqy --no-install-recommends install software-properties-common \
   && add-apt-repository -y ppa:git-core/ppa
-RUN df -h 
+
 #========================
 # Miscellaneous packages
 # iproute which is surprisingly not available in ubuntu:15.04 but is available in ubuntu:latest
@@ -39,10 +39,7 @@ RUN apt-get update -qqy \
 
 # workaround https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=775775
 RUN [ -f "/etc/ssl/certs/java/cacerts" ] || /var/lib/dpkg/info/ca-certificates-java.postinst configure
-RUN apt-get autoclean
-RUN apt-get autoremove
-RUN apt-get clean
-RUN df -h 
+
 #==========
 # Maven
 #==========
@@ -53,7 +50,7 @@ RUN curl -fsSL http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binar
   && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 
 ENV MAVEN_HOME /usr/share/maven
-RUN df -h 
+
 #==========
 # Ant
 #==========
@@ -62,7 +59,7 @@ RUN curl -fsSL https://www.apache.org/dist/ant/binaries/apache-ant-1.10.0-bin.ta
   && ln -s /usr/share/ant/bin/ant /usr/bin/ant
 
 ENV ANT_HOME /usr/share/ant
-RUN df -h 
+
 #========================================
 # Add normal user with passwordless sudo
 #========================================
@@ -77,13 +74,12 @@ RUN df -h
 #====================================
 RUN pip install --upgrade pip
 RUN wget -O - "http://cli.run.pivotal.io/stable?release=linux64-binary&source=github" | tar -C /usr/local/bin -zxf -
-RUN df -h 
+
 #====================================
 # AWS CLI
 #====================================
 RUN pip install awscli
 
-RUN df -h
 
 # compatibility with CloudBees AWS CLI Plugin which expects pip to be installed as user
 RUN mkdir -p /home/jenkins/.local/bin/ \
