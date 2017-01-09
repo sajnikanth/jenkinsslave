@@ -10,6 +10,7 @@ RUN apt-get update -qqy \
   && apt-get -qqy --no-install-recommends install software-properties-common \
   && add-apt-repository -y ppa:git-core/ppa
 
+  
 #====================================
 # Setup Jenkins Slave
 # 
