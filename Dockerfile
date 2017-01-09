@@ -9,6 +9,7 @@ USER root
 # Make ssh dir
 RUN mkdir /root/.ssh/
 
+
 # Copy over private key, and set permissions
 ADD id_rsa /root/.ssh/id_rsa
 RUN chmod 600 /root/.ssh/id_rsa
