@@ -12,6 +12,14 @@ RUN apt-get update -qqy \
 
 RUN apt-get update
 RUN apt-get install curl  
+
+#========================================
+# Add normal user with passwordless sudo
+#========================================
+RUN useradd jenkins --shell /bin/bash --create-home \
+  && usermod -a -G sudo jenkins \
+  && echo 'ALL ALL = (ALL) NOPASSWD: ALL' >> /etc/sudoers \
+  && echo 'jenkins:secret' | chpasswd
   
 #====================================
 # Setup Jenkins Slave
