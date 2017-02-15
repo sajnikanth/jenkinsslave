@@ -12,7 +12,7 @@ RUN apt-get update -qqy \
   && apt-get -qqy --no-install-recommends install software-properties-common \
   && add-apt-repository -y ppa:git-core/ppa
 
-  
+
 #========================
 # Miscellaneous packages
 # iproute which is surprisingly not available in ubuntu:15.04 but is available in ubuntu:latest
@@ -94,76 +94,10 @@ RUN mkdir -p /home/jenkins/.local/bin/ \
 RUN curl -sL https://deb.nodesource.com/setup_4.x | bash \
     && apt-get install -y nodejs
 
-#====================================
-# AZURE CLI
-# See https://hub.docker.com/r/microsoft/azure-cli/~/dockerfile/
-#====================================
-
-RUN npm install --global azure-cli@0.10.1
-
-#====================================
-# BOWER, GRUNT, GULP
-#====================================
-
-RUN npm install --global grunt-cli@0.1.2 bower@1.7.9 gulp@3.9.1
-
-#====================================
-# Kubernetes CLI
-# See http://kubernetes.io/v1.0/docs/getting-started-guides/aws/kubectl.html
-#====================================
-RUN curl https://storage.googleapis.com/kubernetes-release/release/v1.2.3/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && chmod +x /usr/local/bin/kubectl
-
-#====================================
-# OPENSHIFT V3 CLI
-# Only install "oc" executable, don't install "openshift", "oadmin"...
-#====================================
-RUN mkdir /var/tmp/openshift \
-      && wget -O - "https://github.com/openshift/origin/releases/download/v1.2.0/openshift-origin-client-tools-v1.2.0-2e62fab-linux-64bit.tar.gz" \
-      | tar -C /var/tmp/openshift --strip-components=1 -zxf - \
-      && mv /var/tmp/openshift/oc /usr/local/bin \
-      && rm -rf /var/tmp/openshift
-
-#====================================
-# Clone product and install java depedencies
-# https://github.com/albumprinter/FitNesseTestFramework.git
-#====================================
-# Make ssh dir
-#RUN mkdir /root/.ssh/
-
-# Copy over private key, and set permissions
-#ADD id_rsa /root/.ssh/id_rsa
-#RUN chmod 600 /root/.ssh/id_rsa
-
-# Create known_hosts
-#RUN touch /root/.ssh/known_hosts
-# Add bitbuckets key
-#RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
-
-# Clone the conf files into the docker container
-#RUN git clone git@github.com:albumprinter/FitNesseTestFramework.git /root/repo
-
-#RUN cd /root/repo && mvn install -Dmaven.test.skip=true
-#RUN rm -rf /root/repo
-
-#====================================
-# Install Jars
-# serenity-core-1.1.42.jar
-#====================================
-#COPY serenity-core-1.1.42.jar /usr/local/serenity-core-1.1.42.jar
-#RUN  mvn install:install-file -Dfile=/usr/local/serenity-core-1.1.42.jar -DgroupId=net.serenity-bdd -DartifactId=serenity-core -Dversion=1.1.42 -Dpackaging=jar
-
-#====================================
-# Copy dependencies to jenkins user
-# 
-#====================================
-#RUN cp -a /root/.m2 /home/jenkins/.m2
-#RUN chown -R jenkins /home/jenkins/.m2
-#RUN rm -rf /root/.m2
-
 
 #====================================
 # Setup Jenkins Slave
-# 
+#
 #====================================
 
 USER root
