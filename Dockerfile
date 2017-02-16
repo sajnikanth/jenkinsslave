@@ -157,7 +157,7 @@ RUN  mvn install:install-file -Dfile=/usr/local/serenity-core-1.1.42.jar -Dgroup
 #
 #====================================
 RUN cp -a /root/.m2 /home/jenkins/.m2
-COPY setting.xml /home/jenkins/.m2/setting.xml
+COPY settings.xml /home/jenkins/.m2/settings.xml
 RUN echo Display jenkins m2 size
 RUN du -hs /home/jenkins/.m2
 RUN chown -R jenkins /home/jenkins/.m2
