@@ -122,20 +122,19 @@ RUN mkdir /var/tmp/openshift \
       && mv /var/tmp/openshift/oc /usr/local/bin \
       && rm -rf /var/tmp/openshift
 
+USER root
 #====================================
 # Add local maven repository setting file
 #
 #====================================
 ADD settings.xml /home/jenkins/.m2/settings.xml
-RUN chmod 600 /home/jenkins/.m2/settings.xml
+RUN chmod 777 /home/jenkins/.m2/settings.xml
 
 
 #====================================
 # Setup Jenkins Slave
 #
 #====================================
-
-USER root
 
 ARG VERSION=2.62
 
