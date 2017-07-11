@@ -12,8 +12,7 @@ RUN apt-get update -qqy \
   && apt-get -qqy --no-install-recommends install software-properties-common \
   && add-apt-repository -y ppa:git-core/ppa
 
-RUN echo "Europe/Asterdam" > /etc/timezone
-RUN RUN sudo dpkg-reconfigure -f noninteractive tzdata
+RUN echo "Europe/Amsterdam" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
 
 #========================
 # Miscellaneous packages
