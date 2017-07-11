@@ -8,9 +8,14 @@ RUN  echo "deb http://archive.ubuntu.com/ubuntu xenial main universe\n" > /etc/a
   && echo "deb http://archive.ubuntu.com/ubuntu xenial-updates main universe\n" >> /etc/apt/sources.list \
   && echo "deb http://security.ubuntu.com/ubuntu xenial-security main universe\n" >> /etc/apt/sources.list
 
+RUN echo "Europe/Amsterdam" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
+VOLUME /etc/timezone /etc/localtime
+
 RUN apt-get update -qqy \
   && apt-get -qqy --no-install-recommends install software-properties-common \
   && add-apt-repository -y ppa:git-core/ppa
+
+RUN cat hosts
 
 #========================
 # Miscellaneous packages
@@ -125,7 +130,7 @@ RUN mkdir /var/tmp/openshift \
 
 #====================================
 # Setup Jenkins Slave
-# 
+#
 #====================================
 
 USER root
