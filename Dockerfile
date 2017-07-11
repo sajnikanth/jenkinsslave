@@ -9,7 +9,6 @@ RUN  echo "deb http://archive.ubuntu.com/ubuntu xenial main universe\n" > /etc/a
   && echo "deb http://security.ubuntu.com/ubuntu xenial-security main universe\n" >> /etc/apt/sources.list
 
 RUN echo "Europe/Amsterdam" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
-VOLUME /etc/timezone /etc/localtime
 
 RUN apt-get update -qqy \
   && apt-get -qqy --no-install-recommends install software-properties-common \
