@@ -1,4 +1,4 @@
-FROM selenium/node-chrome:3.0.1-carbon
+FROM selenium/node-chrome:3.4.0-einsteinium
 
 MAINTAINER Bo Wang "bo.wang@albumprinter.com"
 
