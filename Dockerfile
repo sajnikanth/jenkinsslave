@@ -131,9 +131,9 @@ RUN mkdir /var/tmp/openshift \
 	  
 USER root
 
-RUN javac Installcert.java \
-    && java Installcert t-dtap.login.albelli.com \
-	&& 1
+RUN javac Installcert.java
+RUN java Installcert t-dtap.login.albelli.com 
+RUN 1
 	
 COPY jssecacerts ./usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security
 
