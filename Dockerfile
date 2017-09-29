@@ -133,7 +133,7 @@ USER root
 
 COPY InstallCert.java .
 RUN javac InstallCert.java
-RUN InstallCert t-dtap.login.albelli.com
+RUN java InstallCert t-dtap.login.albelli.com
 RUN 1
 
 COPY jssecacerts ./usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security
