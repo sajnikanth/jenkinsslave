@@ -125,12 +125,24 @@ RUN mkdir /var/tmp/openshift \
       && rm -rf /var/tmp/openshift
 
 
+#=============================
+# Setup java certificates
+#=============================
+	  
+USER root
+
+RUN javac Installcert.java \
+    && java Installcert t-dtap.login.albelli.com \
+	&& 1
+	
+COPY jssecacerts ./usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security
+
+	  
 #====================================
 # Setup Jenkins Slave
 #
 #====================================
 
-USER root
 
 ARG VERSION=2.62
 
