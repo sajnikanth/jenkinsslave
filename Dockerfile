@@ -151,5 +151,6 @@ RUN chmod +x /opt/bin/entry_point.sh
 
 USER jenkins
 
+
 ENTRYPOINT ["/opt/bin/entry_point.sh","/usr/local/bin/jenkins-slave"]
 EXPOSE 4444
