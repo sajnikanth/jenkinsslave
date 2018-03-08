@@ -130,6 +130,11 @@ USER root
 ADD settings.xml /home/jenkins/.m2/settings.xml
 RUN chmod 777 /home/jenkins/.m2/settings.xml
 
+COPY credentials /home/jenkins/.aws/credentials
+RUN chmod 777 /home/jenkins/.aws/credentials
+COPY config /home/jenkins/.aws/config
+RUN chmod 777 /home/jenkins/.aws/config
+
 
 #====================================
 # Setup Jenkins Slave
