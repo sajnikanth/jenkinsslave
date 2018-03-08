@@ -54,8 +54,8 @@ ENV MAVEN_HOME /usr/share/maven
 #==========
 # Ant
 #==========
-RUN curl -fsSL https://www.apache.org/dist/ant/binaries/apache-ant-1.10.1-bin.tar.gz | tar xzf - -C /usr/share \
-  && mv /usr/share/apache-ant-1.10.1 /usr/share/ant \
+RUN curl -fsSL https://www.apache.org/dist/ant/binaries/apache-ant-1.10.2-bin.tar.gz | tar xzf - -C /usr/share \
+  && mv /usr/share/apache-ant-1.10.2 /usr/share/ant \
   && ln -s /usr/share/ant/bin/ant /usr/bin/ant
 
 ENV ANT_HOME /usr/share/ant
