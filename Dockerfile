@@ -134,8 +134,6 @@ COPY credentials /home/jenkins/.aws/credentials
 RUN chmod 777 /home/jenkins/.aws/credentials
 COPY config /home/jenkins/.aws/config
 RUN chmod 777 /home/jenkins/.aws/config
-COPY test-orchestrator.jar /home/jenkins/test-orchestrator.jar
-RUN chmod 777 /home/jenkins/test-orchestrator.jar
 
 
 #====================================
