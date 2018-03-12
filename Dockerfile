@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM microsoft/dotnet:2.0.0-sdk
 
 MAINTAINER Bo Wang "bo.wang@albumprinter.com"
 
