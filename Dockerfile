@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.0.0-sdk
+FROM ubuntu:16.04
 
 MAINTAINER Bo Wang "bo.wang@albumprinter.com"
 
@@ -21,12 +21,27 @@ RUN useradd jenkins --shell /bin/bash --create-home \
   && echo 'ALL ALL = (ALL) NOPASSWD: ALL' >> /etc/sudoers \
   && echo 'jenkins:secret' | chpasswd
   
+  
+#====================================
+# Install dotnet core 2
+# 
+#====================================
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+RUN mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-xenial-prod xenial main" > /etc/apt/sources.list.d/dotnetdev.list'
+RUN apt-get update
+RUN apt-get install dotnet-sdk-2.1.4
+RUN dotnet --version
+
+  
 #====================================
 # Setup Jenkins Slave
 # 
 #====================================
 
 USER root
+
+
 
 ARG VERSION=2.62
 
