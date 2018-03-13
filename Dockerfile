@@ -1,4 +1,17 @@
-FROM debian:stretch
+FROM ubuntu:16.04
+
+
+MAINTAINER Bo Wang "bo.wang@albumprinter.com"
+
+RUN df -h
+
+RUN  echo "deb http://archive.ubuntu.com/ubuntu xenial main universe\n" > /etc/apt/sources.list \
+  && echo "deb http://archive.ubuntu.com/ubuntu xenial-updates main universe\n" >> /etc/apt/sources.list \
+  && echo "deb http://security.ubuntu.com/ubuntu xenial-security main universe\n" >> /etc/apt/sources.list
+
+RUN apt-get update -qqy \
+  && apt-get -qqy --no-install-recommends install software-properties-common \
+  && add-apt-repository -y ppa:git-core/ppa
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
