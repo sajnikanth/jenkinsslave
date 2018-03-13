@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM microsoft/aspnetcore-build:2.0.3 AS builder
 
 
 MAINTAINER Bo Wang "bo.wang@albumprinter.com"
