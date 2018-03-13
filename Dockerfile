@@ -42,6 +42,9 @@ RUN apt-get update \
         libunwind8 \
         libuuid1 \
         zlib1g \
+        tar zip unzip \
+        wget curl \
+        git \
     && rm -rf /var/lib/apt/lists/*
 
 # Install .NET Core SDK
@@ -65,23 +68,6 @@ RUN mkdir warmup \
     && rm -rf warmup \
     && rm -rf /tmp/NuGetScratch\
 
-
-RUN apt-get update -qqy \
-  && apt-get -qqy --no-install-recommends install \
-    iproute \
-    openssh-client ssh-askpass\
-    ca-certificates \
-    openjdk-8-jdk \
-    tar zip unzip \
-    wget curl \
-    git \
-    build-essential \
-    less nano tree \
-    python python-pip groff \
-    python-setuptools\
-    rlwrap \
-  && rm -rf /var/lib/apt/lists/* \
-  && sed -i 's/securerandom\.source=file:\/dev\/random/securerandom\.source=file:\/dev\/urandom/' ./usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security
 
 #========================================
 # Add normal user with passwordless sudo
