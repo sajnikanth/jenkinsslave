@@ -13,25 +13,22 @@ RUN apt-get update -qqy \
   && apt-get -qqy --no-install-recommends install software-properties-common \
   && add-apt-repository -y ppa:git-core/ppa
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        libc6 \
-        libcurl3 \
-        libgcc1 \
-        libgssapi-krb5-2 \
-        libicu57 \
-        liblttng-ust0 \
-        libssl1.0.2 \
-        libstdc++6 \
-        libunwind8 \
-        libuuid1 \
-        zlib1g \
-        openssh-client ssh-askpass\
-        ca-certificates \
-        tar zip unzip \
-        wget curl \
-        git \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update -qqy \
+  && apt-get -qqy --no-install-recommends install \
+    iproute \
+    openssh-client ssh-askpass\
+    ca-certificates \
+    openjdk-8-jdk \
+    tar zip unzip \
+    wget curl \
+    git \
+    build-essential \
+    less nano tree \
+    python python-pip groff \
+    python-setuptools\
+    rlwrap \
+  && rm -rf /var/lib/apt/lists/* \
+  && sed -i 's/securerandom\.source=file:\/dev\/random/securerandom\.source=file:\/dev\/urandom/' ./usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security
 
 
 #========================================
