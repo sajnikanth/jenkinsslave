@@ -2,12 +2,24 @@ FROM ubuntu:16.04
 
 MAINTAINER Bo Wang "bo.wang@albumprinter.com"
 
+ENV MONO_VERSION 5.4.1.6
+
 RUN df -h
+
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 7E0328081BFF6A14DA29AA6A19B38D3D831EF
 
 RUN  echo "deb http://archive.ubuntu.com/ubuntu xenial main universe\n" > /etc/apt/sources.list \
   && echo "deb http://archive.ubuntu.com/ubuntu xenial-updates main universe\n" >> /etc/apt/sources.list \
   && echo "deb http://security.ubuntu.com/ubuntu xenial-security main universe\n" >> /etc/apt/sources.list \
-&& echo "deb [arch=amd64] http://packages.microsoft.com/repos/microsoft-ubuntu-xenial-prod xenial main" > /etc/apt/sources.list.d/dotnetdev.list
+&& echo "deb [arch=amd64] http://packages.microsoft.com/repos/microsoft-ubuntu-xenial-prod xenial main" > /etc/apt/sources.list.d/dotnetdev.list \
+&& echo "deb http://download.mono-project.com/repo/debian stretch/snapshots/$MONO_VERSION main" > /etc/apt/sources.list.d/mono-official.list \  
+  && apt-get update \
+  && apt-get install -y mono-runtime \
+  && rm -rf /var/lib/apt/lists/* /tmp/*
+
+RUN apt-get update \  
+  && apt-get install -y binutils curl mono-devel ca-certificates-mono fsharp mono-vbnc nuget \
+  && rm -rf /var/lib/apt/lists/* /tmp/*
 
 RUN apt-get update -qqy \
   && apt-get -qqy --no-install-recommends install software-properties-common \
