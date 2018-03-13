@@ -13,6 +13,8 @@ RUN apt-get update \
         libunwind8 \
         libuuid1 \
         zlib1g \
+        openssh-client ssh-askpass\
+        ca-certificates \
         tar zip unzip \
         wget curl \
         git \
