@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.0.5-sdk-2.1.4
+FROM ubuntu:16.04
 
 
 #========================================
@@ -8,6 +8,15 @@ RUN useradd jenkins --shell /bin/bash --create-home \
   && usermod -a -G sudo jenkins \
   && echo 'ALL ALL = (ALL) NOPASSWD: ALL' >> /etc/sudoers \
   && echo 'jenkins:secret' | chpasswd
+
+RUN pip install awscli
+
+
+# compatibility with CloudBees AWS CLI Plugin which expects pip to be installed as user
+RUN mkdir -p /home/jenkins/.local/bin/ \
+  && ln -s /usr/bin/pip /home/jenkins/.local/bin/pip \
+  && chown -R jenkins:jenkins /home/jenkins/.local
+
 
 #====================================
 # Setup Jenkins Slave
