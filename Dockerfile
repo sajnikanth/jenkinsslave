@@ -22,6 +22,8 @@ RUN apt-get update -qqy \
     wget curl \
     git \
     build-essential \
+    less nano tree \
+    rlwrap \
   && rm -rf /var/lib/apt/lists/* 
 
 
