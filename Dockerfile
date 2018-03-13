@@ -15,6 +15,7 @@ RUN apt-get update -qqy \
 
 RUN apt-get update -qqy \
   && apt-get -qqy --no-install-recommends install \
+    iproute \
     openssh-client ssh-askpass\
     ca-certificates \
     tar zip unzip \
