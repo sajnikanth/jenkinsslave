@@ -6,12 +6,12 @@ MAINTAINER Bo Wang "bo.wang@albumprinter.com"
 RUN df -h
 
 
-RUN apt-get update -qqy \
-  && apt-get -qqy --no-install-recommends install software-properties-common \
-  && add-apt-repository -y ppa:git-core/ppa
+#RUN apt-get update -qqy \
+#  && apt-get -qqy --no-install-recommends install software-properties-common \
+#  && add-apt-repository -y ppa:git-core/ppa
 
-RUN apt-get update -qqy \
-  && apt-get -qqy --no-install-recommends install \
+RUN apt-get update \
+  && apt-get install -y \
     iproute \
     openssh-client ssh-askpass\
     ca-certificates \
