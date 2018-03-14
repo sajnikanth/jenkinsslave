@@ -6,26 +6,15 @@ MAINTAINER Bo Wang "bo.wang@albumprinter.com"
 RUN df -h
 
 
-#RUN apt-get update -qqy \
-#  && apt-get -qqy --no-install-recommends install software-properties-common \
-#  && add-apt-repository -y ppa:git-core/ppa
-
 RUN apt-get update \
   && apt-get install -y \
-    iproute \
     openssh-client ssh-askpass\
     ca-certificates \
-    openjdk-8-jdk \
-    tar zip unzip \
-    wget curl \
+    default-jre \
+    zip \
+    curl \
     git \
-    build-essential \
-    less nano tree \
-    python python-pip groff \
-    python-setuptools\
-    rlwrap \
-  && rm -rf /var/lib/apt/lists/* \
-  && sed -i 's/securerandom\.source=file:\/dev\/random/securerandom\.source=file:\/dev\/urandom/' ./usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security
+  && rm -rf /var/lib/apt/lists/* 
 
 #========================================
 # Add normal user with passwordless sudo
