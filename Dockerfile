@@ -68,6 +68,7 @@ RUN set -o errexit -o nounset \
 #========================================
 # Add normal user with passwordless sudo
 #========================================
+USER root
 RUN useradd jenkins --shell /bin/bash --create-home \
   && usermod -a -G sudo jenkins \
   && echo 'ALL ALL = (ALL) NOPASSWD: ALL' >> /etc/sudoers \
