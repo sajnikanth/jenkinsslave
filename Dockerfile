@@ -10,6 +10,7 @@ RUN apt-get update -qqy \
     ca-certificates \
     curl \
     git \
+    tar zip unzip \
     python python-pip groff \
     python-setuptools\
   && rm -rf /var/lib/apt/lists/* 
