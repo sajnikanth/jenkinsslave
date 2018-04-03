@@ -11,6 +11,7 @@ RUN apt-get update -qqy \
     curl \
     git \
     tar zip unzip \
+    nuget \	
     python python-pip groff \
     python-setuptools\
   && rm -rf /var/lib/apt/lists/* 
