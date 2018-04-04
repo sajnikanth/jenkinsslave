@@ -103,13 +103,21 @@ RUN chmod 777 /home/jenkins/.m2/settings.xml
 
 
 #====================================
-# .NET Core SDK
+# .NET Core Runtime
 #====================================
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg \
     && mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg \
     && sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-stretch-prod stretch main" > /etc/apt/sources.list.d/dotnetdev.list' \
 	&& apt-get -qqy update \
-	&& apt-get -qqy install dotnet-sdk-2.1.103
+	&& apt-get -qqy install dotnet-runtime-2.0.6
+
+#==========
+# Octopus tools cli
+#==========
+ENV OCTOPUS_VERSION 4.31.7
+
+RUN mkdir /usr/octopus/ \
+    && curl -fsSL https://download.octopusdeploy.com/octopus-tools/$OCTOPUS_VERSION/OctopusTools.$OCTOPUS_VERSION.debian.8-x64.tar.gz | tar xzf - -C /usr/octopus/
 
 #====================================
 # Setup Jenkins Slave
