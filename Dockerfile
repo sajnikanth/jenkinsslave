@@ -12,6 +12,7 @@ RUN apt-get update -qqy \
     git \
     tar zip unzip \
     nuget \	
+	libunwind8 gettext apt-transport-https \
     python python-pip groff \
     python-setuptools\
   && rm -rf /var/lib/apt/lists/* 
@@ -100,6 +101,15 @@ RUN chmod 777 /home/jenkins/.m2/settings.xml
 #COPY config /home/jenkins/.aws/config
 #RUN chmod 777 /home/jenkins/.aws/config
 
+
+#====================================
+# .NET Core SDK
+#====================================
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg \
+    && mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg \
+    && sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-stretch-prod stretch main" > /etc/apt/sources.list.d/dotnetdev.list' \
+	&& apt-get -qqy update \
+	&& apt-get -qqy install dotnet-sdk-2.1.103
 
 #====================================
 # Setup Jenkins Slave
