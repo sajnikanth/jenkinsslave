@@ -114,7 +114,7 @@ ENV PATH="/usr/octopus:${PATH}"
 #
 #====================================
 
-ARG VERSION=2.62
+ARG VERSION=3.18
 
 RUN curl --create-dirs -sSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar \
   && chmod 755 /usr/share/jenkins \
