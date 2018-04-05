@@ -22,6 +22,18 @@ RUN useradd jenkins --shell /bin/bash --create-home \
   && echo 'jenkins:secret' | chpasswd
 
 #========================================
+# Cake build cli
+#========================================
+ENV CAKE_VERSION 0.26.1
+
+RUN mkdir /usr/cake/ \
+	&& wget --no-verbose --output-document=cake.zip https://github.com/cake-build/cake/releases/download/v$CAKE_VERSION/Cake-bin-coreclr-v$CAKE_VERSION.zip \
+	&& unzip cake.zip -d /usr/cake/ \ 
+	&& rm -f cake.zip
+
+ENV PATH="/usr/cake:${PATH}"
+
+#========================================
 # Octopus tools cli
 #========================================
 ENV OCTOPUS_VERSION 4.31.7
