@@ -1,10 +1,7 @@
-FROM microsoft/dotnet:2.0.3-sdk AS builder
+FROM microsoft/dotnet:2.0-sdk AS builder
 
-
-MAINTAINER Bo Wang "bo.wang@albumprinter.com"
-
-RUN df -h
-
+ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
+ENV DOTNET_SKIP_FIRST_TIME_EXPERIENCE 1
 
 RUN apt-get update \
   && apt-get install -y \
@@ -24,15 +21,22 @@ RUN useradd jenkins --shell /bin/bash --create-home \
   && echo 'ALL ALL = (ALL) NOPASSWD: ALL' >> /etc/sudoers \
   && echo 'jenkins:secret' | chpasswd
 
+#========================================
+# Octopus tools cli
+#========================================
+ENV OCTOPUS_VERSION 4.31.7
 
-#====================================
-# Setup Jenkins Slave
-#
-#====================================
+RUN mkdir /usr/octopus/ \
+    && curl -fsSL https://download.octopusdeploy.com/octopus-tools/$OCTOPUS_VERSION/OctopusTools.$OCTOPUS_VERSION.debian.8-x64.tar.gz | tar xzf - -C /usr/octopus/ 
 
-ARG VERSION=2.62
+ENV PATH="/usr/octopus:${PATH}"
 
-RUN curl --create-dirs -sSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar \
+#========================================
+# Jenkins Slave
+#========================================
+ARG JENKINS_SLAVE_VERSION=3.18
+
+RUN curl --create-dirs -sSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${JENKINS_SLAVE_VERSION}/remoting-${JENKINS_SLAVE_VERSION}.jar \
   && chmod 755 /usr/share/jenkins \
   && chmod 644 /usr/share/jenkins/slave.jar
 
