@@ -11,8 +11,7 @@ RUN apt-get update -qqy \
     curl \
     git \
     tar zip unzip \
-    nuget \	
-	libunwind8 gettext apt-transport-https \
+    libunwind8 \
     python python-pip groff \
     python-setuptools\
   && rm -rf /var/lib/apt/lists/* 
