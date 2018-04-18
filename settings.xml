@@ -7,7 +7,12 @@
       <username>admin</username>
       <password>admin123</password>
    </server>
-  </servers>
+   <server>
+      <id>Releases</id>
+      <username>admin</username>
+      <password>admin123</password>
+   </server>
+   </servers>
 
   <profiles>
     <profile>
@@ -31,9 +36,20 @@
       </repositories>
 
     </profile>
+	      <profile>
+      <id>nexus_releases</id>
+      <repositories>
+        <repository>
+          <id>Releases</id>
+          <url>http://192.168.6.24:8081/nexus/content/repositories/releases</url>
+        </repository>
+      </repositories>
+
+    </profile>
   </profiles>
   <activeProfiles>
     <!--make the profile active all the time -->
     <activeProfile>nexus</activeProfile>
+	<activeProfile>nexus_releases</activeProfile>
   </activeProfiles>
 </settings>
