@@ -12,6 +12,7 @@ RUN apt-get update -qqy \
     git \
     tar zip unzip \
     sudo\
+    apt-transport-https\
   && rm -rf /var/lib/apt/lists/* 
 
  
@@ -19,10 +20,10 @@ RUN apt-get update -qqy \
 # Install Loadimpact K6
 #========================================
 #USER root
-#RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
-#RUN echo "deb https://dl.bintray.com/loadimpact/deb stable main" | sudo tee -a /etc/apt/sources.list
-#RUN apt-get update
-#RUN apt-get install k6
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
+RUN echo "deb https://dl.bintray.com/loadimpact/deb stable main" | sudo tee -a /etc/apt/sources.list
+RUN apt-get update
+RUN apt-get install k6
   
 #========================================
 # Add normal user with passwordless sudo 
