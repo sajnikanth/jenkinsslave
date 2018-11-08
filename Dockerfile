@@ -11,7 +11,9 @@ RUN apt-get update -qqy \
     curl \
     git \
     tar zip unzip \
+    -y install sudo\
   && rm -rf /var/lib/apt/lists/* 
+
  
 #========================================
 # Install Loadimpact K6
@@ -23,7 +25,7 @@ RUN apt-get update
 RUN apt-get install k6
   
 #========================================
-# Add normal user with passwordless sudo
+# Add normal user with passwordless sudo 
 #========================================
 USER root
 RUN useradd jenkins --shell /bin/bash --create-home \
