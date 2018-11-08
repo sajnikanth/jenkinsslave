@@ -11,7 +11,7 @@ RUN apt-get update -qqy \
     curl \
     git \
     tar zip unzip \
-    -y install sudo\
+    sudo\
   && rm -rf /var/lib/apt/lists/* 
 
  
