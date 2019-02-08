@@ -11,6 +11,7 @@ RUN apt-get update -qqy \
     curl \
     git \
     tar zip unzip \
+    python3.6 \
   && rm -rf /var/lib/apt/lists/* 
  
 #========================================
