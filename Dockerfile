@@ -10,7 +10,7 @@ RUN apt-get update -qqy \
     ca-certificates \
     curl \
     git \
-    tar zip unzip\
+    tar zip unzip \
   && rm -rf /var/lib/apt/lists/*
 
 #========================================
@@ -75,7 +75,7 @@ RUN set -o errexit -o nounset \
 	&& ln -s /home/gradle/.gradle /root/.gradle
 
 # Create Gradle volume
-USER gradle
+#USER gradle
 VOLUME "/home/gradle/.gradle"
 WORKDIR /home/gradle
 
@@ -87,6 +87,12 @@ RUN set -o errexit -o nounset \
 #========================================
 # OCTO
 #========================================
+USER root
+
+RUN apt-get update \
+  && apt-get install -y libunwind8 apt-transport-https dirmngr \
+  && rm -rf /var/lib/apt/lists/*
+
 ENV OCTOPUS_VERSION 4.38.1
 
 RUN mkdir /usr/octopus/ \
