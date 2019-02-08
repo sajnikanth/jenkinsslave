@@ -14,6 +14,7 @@ RUN apt-get update -qqy \
     python3.6 \
   && rm -rf /var/lib/apt/lists/* 
  
+ 
 #========================================
 # Install Loadimpact K6
 #========================================
