@@ -34,6 +34,10 @@ RUN wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VER
     && cd / \
     && rm -rf Python-${PYTHON_VERSION}
 
+# Install more libraries to get python test cases
+RUN apt-get install -y python3-pip python3-lxml
+RUN pip3 install -U pytest boto3
+
 #========================================
 # Install Loadimpact K6
 #========================================
